@@ -1,13 +1,24 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './css/pure-min.css';
-import './css/side-menu.css'
+import './css/side-menu.css';
+import $ from 'jquery';
 
 class App extends Component {
   constructor() {
       super();
       this.state = {lista : [{nome: 'Rodrigo', email: 'rmb.tito@gmail.com', senha: '123456'}]};
-}
+  }
+
+  componentWillMount() {
+      $.ajax({
+          url:"http://localhost:8080/api/autores",
+          dataType: 'json',
+          success:function(resposta){
+              this.state = {lista:resposta};
+          }
+      });
+  }
 
     render() {
     return (
